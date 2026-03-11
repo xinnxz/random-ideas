@@ -131,6 +131,9 @@ class CircularSlider {
 
         // Mulai bubble generator
         this.startBubbles();
+
+        // Inisialisasi efek 3D Tilt pada kaleng fanta
+        this.initVanillaTilt();
     }
 
     /**
@@ -367,9 +370,27 @@ class CircularSlider {
     }
 
     /* ================================================
+       3D TILT EFFECT (VanillaTilt)
+       Menambahkan efek seolah-olah kaleng Fanta itu 3D
+       saat di-hover menggunakan mouse.
+       ================================================ */
+
+    initVanillaTilt() {
+        const tiltElements = document.querySelectorAll('.slider-item img');
+        
+        // Kita hanya terapkan VanillaTilt pada browser desktop (yang support mouse)
+        // Karena di HP efek tilt kurang berguna kalau di swipe.
+        VanillaTilt.init(tiltElements, {
+            max: 25,          // Maksimal kemiringan (derajat)
+            speed: 400,       // Kecepatan putaran efek
+            glare: true,      // Efek pantulan cahaya
+            "max-glare": 0.5, // Maksimal opasitas pantulan cahaya
+            scale: 1.05       // Sedikit di-zoom saat dihover
+        });
+    }
+
+    /* ================================================
        BUBBLE GENERATOR
-       Membuat elemen gelembung secara dinamis
-       untuk efek visual "fizzy soda"
        ================================================ */
 
     startBubbles() {
