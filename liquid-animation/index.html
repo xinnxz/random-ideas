@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Experience mesmerizing liquid animations powered by WebGL shaders. A stunning interactive visual showcase.">
+    <title>Liquid Flow — Interactive Liquid Animation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- WebGL Liquid Animation Canvas (fullscreen background) -->
+    <canvas id="liquid-canvas"></canvas>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <span class="logo-icon">💧</span>
+                <span class="logo-text">Liquid<span class="logo-accent">Flow</span></span>
+            </a>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge animate-on-scroll">
+                <span class="badge-dot"></span>
+                Interactive WebGL Experience
+            </div>
+            <h1 class="hero-title animate-on-scroll">
+                <span class="title-line">Feel the</span>
+                <span class="title-line title-gradient">Liquid Flow</span>
+            </h1>
+            <p class="hero-description animate-on-scroll">
+                Explore a mesmerizing world of fluid dynamics rendered in real-time. 
+                Move your cursor to interact with the liquid simulation powered by WebGL shaders.
+            </p>
+            <div class="hero-actions animate-on-scroll">
+                <a href="#features" class="btn btn-primary">
+                    <span>Explore Now</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <a href="#about" class="btn btn-ghost">Learn More</a>
+            </div>
+            <div class="hero-stats animate-on-scroll">
+                <div class="stat">
+                    <span class="stat-number" data-count="60">0</span><span class="stat-suffix">FPS</span>
+                    <span class="stat-label">Smooth Render</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-number" data-count="100">0</span><span class="stat-suffix">%</span>
+                    <span class="stat-label">GPU Powered</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-number" data-count="8">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">Fluid Blobs</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator animate-on-scroll">
+            <div class="mouse">
+                <div class="mouse-wheel"></div>
+            </div>
+            <span>Scroll to explore</span>
+        </div>
+    </section>
+
+    <!-- ==================== FEATURES SECTION ==================== -->
+    <section class="features" id="features">
+        <div class="section-container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">Features</span>
+                <h2 class="section-title">Powered by <span class="text-gradient">Advanced Tech</span></h2>
+                <p class="section-desc">Built with cutting-edge WebGL technology for stunning real-time liquid simulations.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card animate-on-scroll" id="feature-1">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">WebGL Shaders</h3>
+                    <p class="feature-desc">Fragment shaders run directly on the GPU, enabling smooth and complex liquid simulations at 60fps.</p>
+                </div>
+                <div class="feature-card animate-on-scroll" id="feature-2">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+                            <path d="M2 12h20"/>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Metaball Algorithm</h3>
+                    <p class="feature-desc">Organic blob merging using mathematical metaball functions creates realistic fluid behavior.</p>
+                </div>
+                <div class="feature-card animate-on-scroll" id="feature-3">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                            <line x1="12" y1="2" x2="12" y2="6"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Interactive</h3>
+                    <p class="feature-desc">Mouse tracking creates a responsive blob that follows your cursor in real-time, blending with the animation.</p>
+                </div>
+                <div class="feature-card animate-on-scroll" id="feature-4">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Responsive</h3>
+                    <p class="feature-desc">Automatically adapts to any screen size while maintaining smooth performance across all devices.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== ABOUT / HOW IT WORKS ==================== -->
+    <section class="about" id="about">
+        <div class="section-container">
+            <div class="about-grid">
+                <div class="about-content">
+                    <span class="section-tag animate-on-scroll">How It Works</span>
+                    <h2 class="section-title animate-on-scroll">The Science Behind <span class="text-gradient">Liquid Art</span></h2>
+                    <p class="about-text animate-on-scroll">
+                        This animation uses a <strong>metaball algorithm</strong> implemented as a WebGL fragment shader. 
+                        Multiple invisible spheres (blobs) float across the canvas. For every pixel on screen, 
+                        the shader calculates the influence of each blob based on its distance.
+                    </p>
+                    <p class="about-text animate-on-scroll">
+                        When blobs get close enough, their influence fields overlap and merge — creating the 
+                        characteristic <strong>"liquid merging"</strong> effect. The colors are generated dynamically 
+                        using HSL color space, producing smooth rainbow-like gradients.
+                    </p>
+                    <div class="about-tech-stack animate-on-scroll">
+                        <span class="tech-pill">WebGL 1.0</span>
+                        <span class="tech-pill">GLSL Shaders</span>
+                        <span class="tech-pill">Metaballs</span>
+                        <span class="tech-pill">GPU Rendering</span>
+                        <span class="tech-pill">requestAnimationFrame</span>
+                    </div>
+                </div>
+                <div class="about-visual animate-on-scroll">
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-dot red"></span>
+                            <span class="code-dot yellow"></span>
+                            <span class="code-dot green"></span>
+                            <span class="code-filename">fragment.glsl</span>
+                        </div>
+                        <pre class="code-content"><code><span class="code-keyword">float</span> <span class="code-func">metaball</span>(<span class="code-keyword">vec2</span> p, <span class="code-keyword">vec2</span> center, <span class="code-keyword">float</span> r) {
+    <span class="code-keyword">float</span> d = <span class="code-func">distance</span>(p, center);
+    <span class="code-keyword">return</span> (r * r) / (d * d);
+}
+
+<span class="code-comment">// Sum influence of all blobs</span>
+<span class="code-keyword">float</span> total = <span class="code-num">0.0</span>;
+<span class="code-keyword">for</span>(<span class="code-keyword">int</span> i = <span class="code-num">0</span>; i < NUM_BLOBS; i++) {
+    total += <span class="code-func">metaball</span>(uv, blobs[i], radii[i]);
+}
+
+<span class="code-comment">// Apply threshold → liquid surface</span>
+<span class="code-keyword">if</span>(total > <span class="code-num">1.0</span>) {
+    gl_FragColor = <span class="code-func">mix</span>(color1, color2, total);
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CONTACT / CTA SECTION ==================== -->
+    <section class="contact" id="contact">
+        <div class="section-container">
+            <div class="cta-card animate-on-scroll">
+                <h2 class="cta-title">Ready to Create <span class="text-gradient">Something Beautiful</span>?</h2>
+                <p class="cta-desc">Explore the source code and build your own liquid animations. Open source and free to use.</p>
+                <div class="cta-actions">
+                    <a href="#" class="btn btn-primary btn-lg">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        <span>View on GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="section-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-icon">💧</span>
+                    <span class="logo-text">Liquid<span class="logo-accent">Flow</span></span>
+                </div>
+                <p class="footer-text">Built with WebGL & Fragment Shaders. A visual art experiment.</p>
+                <p class="footer-copy">&copy; 2026 LiquidFlow. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

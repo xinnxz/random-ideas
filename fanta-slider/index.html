@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fanta - Discover the vibrant world of Fanta flavors with our interactive 3D product showcase.">
+    <title>Fanta | Explore Our Flavors</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-orange">
+
+    <!-- ============================================
+         BACKGROUND EFFECTS
+         - Gradient layer & animated fizzy bubbles
+         ============================================ -->
+    <div class="bg-gradient"></div>
+    <div class="bubbles-container" id="bubblesContainer"></div>
+
+    <!-- ============================================
+         NAVBAR
+         ============================================ -->
+    <nav class="navbar" id="navbar">
+        <div class="logo">
+            <!-- Fanta-style bold playful logo -->
+            <span class="logo-text">FANTA</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#" class="nav-link active">Home</a></li>
+            <li><a href="#" class="nav-link">Products</a></li>
+            <li><a href="#" class="nav-link">About</a></li>
+            <li><a href="#" class="nav-link">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- ============================================
+         HERO SECTION
+         Layout: Info Panel (kiri) | Slider (kanan)
+         ============================================ -->
+    <main class="hero" id="hero">
+
+        <!-- ---- Product Info Panel ---- -->
+        <div class="product-info" id="productInfo">
+            <span class="product-tag" id="productTag">NEW FLAVOR</span>
+            <h1 class="product-name" id="productName">Fanta Orange</h1>
+            <p class="product-desc" id="productDesc">
+                The original and iconic Fanta flavor. Bursting with bright, 
+                bold orange taste that's been refreshing the world since 1940. 
+                Feel the fizz, taste the fun!
+            </p>
+            <div class="product-actions">
+                <button class="cta-btn" id="ctaBtn">
+                    <span>Order Now</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </button>
+                <button class="secondary-btn" id="learnMoreBtn">Learn More</button>
+            </div>
+        </div>
+
+        <!-- ---- Circular 3D Slider ---- -->
+        <div class="slider-container" id="sliderContainer">
+            <div class="slider-wrapper">
+                <!-- Glow effect behind active product -->
+                <div class="slider-glow" id="sliderGlow"></div>
+
+                <!-- The 3D ring of products -->
+                <div class="slider-ring" id="sliderRing">
+                    <!-- Item 0: Orange -->
+                    <div class="slider-item" data-index="0" style="--index: 0;">
+                        <img src="images/fanta-orange.png" alt="Fanta Orange" draggable="false">
+                    </div>
+                    <!-- Item 1: Grape -->
+                    <div class="slider-item" data-index="1" style="--index: 1;">
+                        <img src="images/fanta-grape.png" alt="Fanta Grape" draggable="false">
+                    </div>
+                    <!-- Item 2: Strawberry -->
+                    <div class="slider-item" data-index="2" style="--index: 2;">
+                        <img src="images/fanta-strawberry.png" alt="Fanta Strawberry" draggable="false">
+                    </div>
+                    <!-- Item 3: Pineapple -->
+                    <div class="slider-item" data-index="3" style="--index: 3;">
+                        <img src="images/fanta-pineapple.png" alt="Fanta Pineapple" draggable="false">
+                    </div>
+                    <!-- Item 4: Green Apple -->
+                    <div class="slider-item" data-index="4" style="--index: 4;">
+                        <img src="images/fanta-green-apple.png" alt="Fanta Green Apple" draggable="false">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Arrows -->
+            <button class="nav-btn nav-prev" id="navPrev" aria-label="Previous product">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 18l-6-6 6-6"/>
+                </svg>
+            </button>
+            <button class="nav-btn nav-next" id="navNext" aria-label="Next product">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 18l6-6-6-6"/>
+                </svg>
+            </button>
+
+            <!-- Dot Indicators -->
+            <div class="slider-dots" id="sliderDots">
+                <button class="dot active" data-index="0" aria-label="Go to Fanta Orange"></button>
+                <button class="dot" data-index="1" aria-label="Go to Fanta Grape"></button>
+                <button class="dot" data-index="2" aria-label="Go to Fanta Strawberry"></button>
+                <button class="dot" data-index="3" aria-label="Go to Fanta Pineapple"></button>
+                <button class="dot" data-index="4" aria-label="Go to Fanta Green Apple"></button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ============================================
+         FLAVOR BADGES (bottom floating)
+         ============================================ -->
+    <div class="flavor-bar" id="flavorBar">
+        <button class="flavor-badge" data-index="0">🍊 Orange</button>
+        <button class="flavor-badge" data-index="1">🍇 Grape</button>
+        <button class="flavor-badge" data-index="2">🍓 Strawberry</button>
+        <button class="flavor-badge" data-index="3">🍍 Pineapple</button>
+        <button class="flavor-badge" data-index="4">🍏 Green Apple</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

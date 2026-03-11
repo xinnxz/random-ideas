@@ -1,0 +1,763 @@
+/* ================================================
+   FANTA CIRCULAR ROTATING SLIDER
+   Design System & Complete Styling
+   ================================================ */
+
+/* ---- Reset & Base ---- */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    transition: background-color 0.8s ease;
+}
+
+/* ================================================
+   THEME VARIABLES
+   Setiap tema mendefinisikan warna yang digunakan
+   di seluruh halaman. Saat class body berubah,
+   semua elemen yang referensi var() ikut berubah.
+   ================================================ */
+:root {
+    --primary: #FF6B00;
+    --primary-light: #FF9A44;
+    --secondary: #FFD43B;
+    --bg-start: #FF8C00;
+    --bg-end: #FF4500;
+    --bg-dark: #1a0a00;
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.8);
+    --glow-color: rgba(255, 107, 0, 0.4);
+    --bubble-color: rgba(255, 255, 255, 0.08);
+
+    --slider-radius: 320px;
+    --transition-speed: 0.8s;
+    --transition-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* --- Orange Theme (default) --- */
+.theme-orange {
+    --primary: #FF6B00;
+    --primary-light: #FF9A44;
+    --secondary: #FFD43B;
+    --bg-start: #FF7A00;
+    --bg-end: #FF4500;
+    --bg-dark: #1a0a00;
+    --glow-color: rgba(255, 107, 0, 0.5);
+}
+
+/* --- Grape Theme --- */
+.theme-grape {
+    --primary: #7B2FBE;
+    --primary-light: #A855F7;
+    --secondary: #E879F9;
+    --bg-start: #6B21A8;
+    --bg-end: #4C1D95;
+    --bg-dark: #1a0a2e;
+    --glow-color: rgba(123, 47, 190, 0.5);
+}
+
+/* --- Strawberry Theme --- */
+.theme-strawberry {
+    --primary: #E31837;
+    --primary-light: #FB4569;
+    --secondary: #FF8FA3;
+    --bg-start: #DC2626;
+    --bg-end: #991B1B;
+    --bg-dark: #1a0505;
+    --glow-color: rgba(227, 24, 55, 0.5);
+}
+
+/* --- Pineapple Theme --- */
+.theme-pineapple {
+    --primary: #D4A017;
+    --primary-light: #FACC15;
+    --secondary: #FDE68A;
+    --bg-start: #CA8A04;
+    --bg-end: #A16207;
+    --bg-dark: #1a1500;
+    --glow-color: rgba(212, 160, 23, 0.5);
+}
+
+/* --- Green Apple Theme --- */
+.theme-green-apple {
+    --primary: #16A34A;
+    --primary-light: #4ADE80;
+    --secondary: #BBF7D0;
+    --bg-start: #15803D;
+    --bg-end: #166534;
+    --bg-dark: #001a0a;
+    --glow-color: rgba(22, 163, 74, 0.5);
+}
+
+/* ================================================
+   BACKGROUND EFFECTS
+   ================================================ */
+
+/* Gradient overlay - warna berubah sesuai tema */
+.bg-gradient {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(ellipse at 20% 50%, var(--bg-start) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, var(--bg-end) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 100%, var(--primary) 0%, transparent 40%),
+        linear-gradient(135deg, var(--bg-dark) 0%, #0a0a0a 100%);
+    z-index: -2;
+    transition: all var(--transition-speed) var(--transition-ease);
+}
+
+/* Container untuk animasi gelembung */
+.bubbles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+/* Individual bubble */
+.bubble {
+    position: absolute;
+    bottom: -20px;
+    border-radius: 50%;
+    background: var(--bubble-color);
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    animation: bubble-rise linear forwards;
+}
+
+@keyframes bubble-rise {
+    0% {
+        transform: translateY(0) scale(0.5);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.6;
+    }
+    90% {
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateY(-110vh) scale(1.2);
+        opacity: 0;
+    }
+}
+
+/* ================================================
+   NAVBAR
+   ================================================ */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 48px;
+    z-index: 100;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3), transparent);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-text {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--text-primary);
+    letter-spacing: 4px;
+    text-shadow: 
+        0 0 20px var(--glow-color),
+        0 0 40px var(--glow-color);
+    transition: text-shadow var(--transition-speed) ease;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 8px;
+}
+
+.nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 8px 20px;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+/* ================================================
+   HERO SECTION
+   Grid Layout: Info (kiri) | Slider (kanan)
+   ================================================ */
+.hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    height: 100vh;
+    padding: 0 48px;
+    gap: 20px;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+/* ================================================
+   PRODUCT INFO PANEL (kiri)
+   ================================================ */
+.product-info {
+    padding-left: 20px;
+    z-index: 10;
+}
+
+.product-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--secondary);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 6px 16px;
+    border-radius: 30px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(10px);
+    transition: all 0.5s ease;
+}
+
+.product-name {
+    font-size: 4.5rem;
+    font-weight: 900;
+    color: var(--text-primary);
+    line-height: 1.05;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.product-name.fade-out {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.product-desc {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 36px;
+    max-width: 460px;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.product-desc.fade-out {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* ---- Buttons ---- */
+.product-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 36px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--bg-dark);
+    background: linear-gradient(135deg, var(--secondary), var(--primary-light));
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.2),
+        0 0 30px var(--glow-color);
+}
+
+.cta-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.3),
+        0 0 50px var(--glow-color);
+}
+
+.cta-btn:active {
+    transform: translateY(-1px);
+}
+
+.cta-btn svg {
+    transition: transform 0.3s ease;
+}
+
+.cta-btn:hover svg {
+    transform: translateX(4px);
+}
+
+.secondary-btn {
+    padding: 16px 32px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-3px);
+}
+
+/* ================================================
+   CIRCULAR 3D SLIDER
+   ================================================ */
+.slider-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    perspective: 1200px;
+    z-index: 10;
+}
+
+.slider-wrapper {
+    position: relative;
+    width: 340px;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Glow effect di belakang produk aktif */
+.slider-glow {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--glow-color) 0%, transparent 70%);
+    filter: blur(40px);
+    z-index: 0;
+    transition: all var(--transition-speed) ease;
+    animation: glow-pulse 3s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.15); opacity: 1; }
+}
+
+/* 
+   SLIDER RING
+   Container 3D yang menampung semua item produk.
+   transform-style: preserve-3d membuat child elements
+   benar-benar berada di ruang 3D, bukan hanya flat.
+*/
+.slider-ring {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform: rotateY(0deg);
+    transition: transform var(--transition-speed) var(--transition-ease);
+}
+
+/*
+   SLIDER ITEM
+   Setiap item diposisikan di titik berbeda pada lingkaran 3D.
+   
+   Rumus:
+   - 5 items, 360° / 5 = 72° per item
+   - rotateY(index * 72°) → memutar item ke sudut yang benar
+   - translateZ(320px) → mendorong item keluar dari pusat,
+     membentuk lingkaran dengan radius 320px
+   
+   Item yang menghadap kamera (depan) terlihat normal.
+   Item yang di samping/belakang akan menjauh secara 3D.
+*/
+.slider-item {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 240px;
+    height: 340px;
+    margin-left: -120px;
+    margin-top: -170px;
+    transform: rotateY(calc(var(--index) * 72deg)) translateZ(var(--slider-radius));
+    transition: filter 0.5s ease, opacity 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backface-visibility: visible;
+    border-radius: 20px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.slider-item img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
+    transition: all 0.5s var(--transition-ease);
+    user-select: none;
+}
+
+/* Item yang aktif (di depan) - lebih terang dan tajam */
+.slider-item.active img {
+    filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.5));
+    transform: scale(1.1);
+}
+
+/* Item yang tidak aktif - sedikit redup */
+.slider-item:not(.active) img {
+    filter: 
+        drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3))
+        brightness(0.6);
+}
+
+/* ================================================
+   NAVIGATION BUTTONS (Prev / Next)
+   ================================================ */
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 20;
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 0 25px var(--glow-color);
+}
+
+.nav-btn:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.nav-prev {
+    left: -40px;
+}
+
+.nav-next {
+    right: -40px;
+}
+
+/* ================================================
+   DOT INDICATORS
+   ================================================ */
+.slider-dots {
+    display: flex;
+    gap: 10px;
+    margin-top: 40px;
+    z-index: 20;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    padding: 0;
+}
+
+.dot:hover {
+    border-color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.dot.active {
+    background: var(--primary-light);
+    border-color: var(--primary-light);
+    box-shadow: 0 0 12px var(--glow-color);
+    transform: scale(1.2);
+}
+
+/* ================================================
+   FLAVOR BAR (bottom)
+   ================================================ */
+.flavor-bar {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(20px);
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    z-index: 50;
+}
+
+.flavor-badge {
+    padding: 10px 20px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    background: transparent;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.flavor-badge:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.flavor-badge.active {
+    color: var(--bg-dark);
+    background: linear-gradient(135deg, var(--primary-light), var(--secondary));
+    font-weight: 600;
+    box-shadow: 0 0 20px var(--glow-color);
+}
+
+/* ================================================
+   ANIMATIONS
+   ================================================ */
+
+/* Entrance animation saat page load */
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fade-in-scale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.product-info {
+    animation: fade-in-up 1s ease 0.2s both;
+}
+
+.slider-container {
+    animation: fade-in-scale 1s ease 0.5s both;
+}
+
+.navbar {
+    animation: fade-in-up 0.8s ease both;
+}
+
+.flavor-bar {
+    animation: fade-in-up 1s ease 0.8s both;
+}
+
+/* ================================================
+   RESPONSIVE DESIGN
+   ================================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .hero {
+        padding: 0 30px;
+    }
+
+    .product-name {
+        font-size: 3.5rem;
+    }
+
+    .slider-wrapper {
+        width: 280px;
+        height: 340px;
+    }
+
+    .slider-item {
+        width: 200px;
+        height: 280px;
+        margin-left: -100px;
+        margin-top: -140px;
+    }
+
+    :root {
+        --slider-radius: 260px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .hero {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        padding: 100px 24px 120px;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .product-info {
+        padding-left: 0;
+        order: 2;
+    }
+
+    .product-name {
+        font-size: 2.5rem;
+    }
+
+    .product-desc {
+        max-width: 100%;
+        font-size: 1rem;
+        margin-bottom: 24px;
+    }
+
+    .product-actions {
+        justify-content: center;
+    }
+
+    .slider-container {
+        order: 1;
+    }
+
+    .slider-wrapper {
+        width: 220px;
+        height: 280px;
+    }
+
+    .slider-item {
+        width: 160px;
+        height: 220px;
+        margin-left: -80px;
+        margin-top: -110px;
+    }
+
+    :root {
+        --slider-radius: 200px;
+    }
+
+    .nav-prev { left: -20px; }
+    .nav-next { right: -20px; }
+
+    .nav-btn {
+        width: 44px;
+        height: 44px;
+    }
+
+    .navbar {
+        padding: 16px 20px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .flavor-bar {
+        bottom: 16px;
+        gap: 4px;
+        padding: 6px;
+    }
+
+    .flavor-badge {
+        padding: 8px 12px;
+        font-size: 0.75rem;
+    }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+    .product-name {
+        font-size: 2rem;
+    }
+
+    .slider-wrapper {
+        width: 180px;
+        height: 240px;
+    }
+
+    .slider-item {
+        width: 130px;
+        height: 180px;
+        margin-left: -65px;
+        margin-top: -90px;
+    }
+
+    :root {
+        --slider-radius: 160px;
+    }
+
+    .cta-btn {
+        padding: 14px 28px;
+        font-size: 0.9rem;
+    }
+
+    .secondary-btn {
+        padding: 14px 24px;
+        font-size: 0.9rem;
+    }
+}
