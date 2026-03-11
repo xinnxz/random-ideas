@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kumpulan Ide Acak 💡</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* Membuat 5 kolom dengan lebar sama */
+            gap: 20px; /* Jarak antar kotak */
+            max-width: 1200px; /* Lebar maksimal area konten */
+            margin: 0 auto; /* Tengah-kan kontainer horisontal */
+        }
+        .item {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            color: black;
+        }
+        .item:hover {
+            background-color: #f0f0f0;
+        }
+        .item img {
+            width: 100%; /* Gambar menyesuaikan lebar kotak */
+            height: auto;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 10px;
+        }
+        .item h2 {
+            font-size: 16px;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Kumpulan Ide Acak 💡</h1>
+
+    <div class="container">
+        <!-- Item 1: Fanta Slider -->
+        <a href="fanta-slider/" class="item">
+            <img src="images/fanta-slider.png" alt="Fanta Slider">
+            <h2>Fanta Slider</h2>
+        </a>
+
+        <!-- Item 2: Liquid Animation -->
+        <a href="liquid-animation/" class="item">
+            <img src="images/liquid-animation.png" alt="Liquid Animation">
+            <h2>Liquid Animation</h2>
+        </a>
+
+        <!-- Template Item (Bisa di-copy nanti untuk project baru) -->
+        <!--  
+        <a href="nama-folder/" class="item">
+            <img src="images/nama-gambar.png" alt="Nama Project">
+            <h2>Nama Project</h2>
+        </a> 
+        -->
+    </div>
+
+</body>
+</html>
