@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Resto Ghazar | Authentic Armenian Restaurant in Bourj Hammoud, Beirut</title>
+    <meta name="description" content="Experience the finest authentic Armenian cuisine in Beirut at Resto Ghazar — a beloved hidden gem in Bourj Hammoud. Reserve your table today.">
+    <meta name="keywords" content="Armenian restaurant, Beirut, Bourj Hammoud, manti, Lebanese dining, authentic cuisine">
+    <meta property="og:title" content="Resto Ghazar | Authentic Armenian Restaurant in Bourj Hammoud, Beirut">
+    <meta property="og:description" content="Experience the finest authentic Armenian cuisine in Beirut at Resto Ghazar — a beloved hidden gem in Bourj Hammoud.">
+    <meta property="og:type" content="website">
+    
+    <!-- Google Fonts — Playfair Display (elegant serif) + Inter (clean sans-serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ============================================================
+         STICKY HEADER / NAVIGATION
+         - Logo kiri, nav links tengah, CTA button kanan
+         - Akan berubah background saat scroll (via JS)
+         ============================================================ -->
+    <header id="site-header" class="site-header">
+        <div class="header-inner">
+            <a href="#" class="logo" id="logo">
+                <span class="logo-icon">✦</span>
+                <span class="logo-text">Resto Ghazar</span>
+            </a>
+            <nav class="main-nav" id="main-nav">
+                <a href="#story" class="nav-link">Our Story</a>
+                <a href="#menu" class="nav-link">Menu</a>
+                <a href="#reviews" class="nav-link">Reviews</a>
+                <a href="#atmosphere" class="nav-link">Atmosphere</a>
+                <a href="#location" class="nav-link">Location</a>
+            </nav>
+            <a href="#reserve" class="btn btn-reserve-header" id="btn-reserve-header">Reserve Now</a>
+            <!-- Hamburger menu for mobile -->
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Nav Overlay -->
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay">
+        <nav class="mobile-nav">
+            <a href="#story" class="mobile-nav-link">Our Story</a>
+            <a href="#menu" class="mobile-nav-link">Menu</a>
+            <a href="#reviews" class="mobile-nav-link">Reviews</a>
+            <a href="#atmosphere" class="mobile-nav-link">Atmosphere</a>
+            <a href="#location" class="mobile-nav-link">Location</a>
+            <a href="#reserve" class="btn btn-reserve-mobile">Reserve a Table</a>
+        </nav>
+    </div>
+
+
+    <!-- ============================================================
+         HERO SECTION
+         - Full-screen cinematic background
+         - Bold headline, subheadline, 2 CTA buttons
+         - Star rating badge & trust signals
+         ============================================================ -->
+    <section id="hero" class="hero">
+        <div class="hero-bg">
+            <img src="images/hero-feast.png" alt="Armenian feast spread at Resto Ghazar" class="hero-bg-img">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge reveal">
+                <span class="stars">★★★★★</span>
+                <span class="badge-text">Rated one of Beirut's best</span>
+            </div>
+            <h1 class="hero-title reveal">
+                Where Beirut Comes<br>to Taste <span class="text-gold">Armenia</span>.
+            </h1>
+            <p class="hero-subtitle reveal">
+                Authentic Armenian cuisine. Generations of flavor. One address in Beirut.
+            </p>
+            <div class="hero-ctas reveal">
+                <a href="#reserve" class="btn btn-primary" id="btn-hero-reserve">Reserve a Table</a>
+                <a href="#menu" class="btn btn-outline" id="btn-hero-menu">Explore the Menu</a>
+            </div>
+            <p class="hero-trust reveal">Est. in Bourj Hammoud · Beloved by locals & travelers alike</p>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         OUR STORY
+         - Evocative narrative about the restaurant
+         - Split: decorative gold line + text block
+         ============================================================ -->
+    <section id="story" class="section section-story">
+        <div class="container">
+            <div class="story-grid">
+                <div class="story-label reveal">
+                    <span class="section-tag">Our Story</span>
+                    <div class="gold-line"></div>
+                </div>
+                <div class="story-content reveal">
+                    <h2 class="section-title">A Hidden Gem in the Heart of <span class="text-gold">Bourj Hammoud</span></h2>
+                    <p class="story-text">
+                        Tucked in the vibrant, bustling streets of Bourj Hammoud — Beirut's living, breathing Armenian quarter — 
+                        <strong>Resto Ghazar</strong> is more than a restaurant. It's a homecoming.
+                    </p>
+                    <p class="story-text">
+                        Every dish is made with pure love, following recipes passed down through generations. 
+                        The kind of food where you taste the hands that made it — slow-simmered, carefully spiced, 
+                        and served with the warmth of someone feeding their own family.
+                    </p>
+                    <p class="story-text">
+                        Guests don't just visit Ghazar. They return — some every single week when they're in Beirut. 
+                        Because once you sit at this table, it becomes <em>your</em> table.
+                    </p>
+                    <div class="story-signature">
+                        <span class="signature-line"></span>
+                        <span class="signature-text">— The Ghazar Family</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         SIGNATURE DISHES
+         - Grid/card layout of 10 featured dishes
+         - Each card: image placeholder, dish name, description
+         ============================================================ -->
+    <section id="menu" class="section section-menu">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">The Menu</span>
+                <h2 class="section-title">Signature <span class="text-gold">Dishes</span></h2>
+                <p class="section-subtitle">Every plate tells a story. These are the dishes that keep Beirut coming back.</p>
+            </div>
+            <div class="dishes-grid">
+
+                <!-- Dish Card 1: Manti -->
+                <div class="dish-card dish-card-featured reveal" id="dish-manti">
+                    <div class="dish-img-wrapper">
+                        <img src="images/dish-manti.png" alt="Armenian Manti" class="dish-img">
+                        <div class="dish-badge">★ Fan Favorite</div>
+                    </div>
+                    <div class="dish-info">
+                        <h3 class="dish-name">Manti</h3>
+                        <p class="dish-desc">Tiny, handcrafted dumplings bathed in warm yogurt and kissed with sumac. Our all-time bestseller — the dish that built our reputation.</p>
+                    </div>
+                </div>
+
+                <!-- Dish Card 2: Cabab with Cherry -->
+                <div class="dish-card reveal" id="dish-cherry-kebab">
+                    <div class="dish-img-wrapper">
+                        <img src="images/dish-kebab.png" alt="Cabab with Cherry" class="dish-img">
+                    </div>
+                    <div class="dish-info">
+                        <h3 class="dish-name">Cabab with Cherry</h3>
+                        <p class="dish-desc">Succulent lamb kebab braised with tart sour cherries — a sweet-savory masterpiece unique to Armenian cuisine.</p>
+                    </div>
+                </div>
+
+                <!-- Dish Card 3: Soujouk Cheese Rolls -->
+                <div class="dish-card reveal" id="dish-sujuk-berek">
+                    <div class="dish-img-wrapper">
+                        <img src="images/dish-lahmajun.png" alt="Soujouk Cheese Rolls" class="dish-img">
+                    </div>
+                    <div class="dish-info">
+                        <h3 class="dish-name">Soujouk Cheese Rolls</h3>
+                        <p class="dish-desc">Flaky pastry rolls filled with spiced soujouk sausage and melted cheese. Golden, crispy, and impossible to eat just one.</p>
+                    </div>
+                </div>
+
+                <!-- Dish Card 4: Mouhammara -->
+                <div class="dish-card reveal" id="dish-mhammara">
+                    <div class="dish-img-wrapper">
+                        <img src="images/dish-mhammara.png" alt="Mouhammara" class="dish-img">
+                    </div>
+                    <div class="dish-info">
+                        <h3 class="dish-name">Mouhammara</h3>
+                        <p class="dish-desc">Smoky roasted red pepper and walnut dip, finished with pomegranate molasses and a drizzle of olive oil.</p>
+                    </div>
+                </div>
+
+                <!-- Dish Card 5: Lahm Bi Ajeen -->
+                <div class="dish-card reveal" id="dish-lahmajun">
+                    <div class="dish-img-wrapper">
+                        <img src="images/dish-lahmajun.png" alt="Lahm Bi Ajeen" class="dish-img">
+                    </div>
+                    <div class="dish-info">
+                        <h3 class="dish-name">Lahm Bi Ajeen</h3>
+                        <p class="dish-desc">Paper-thin flatbread topped with spiced minced meat, baked in a traditional stone oven. Available till 4:00 PM — regular, with eggplant, or with pomegranate molasses.</p>
+                    </div>
+                </div>
+
+                <!-- Dish Card 6: Vospov Keufte -->
+                <div class="dish-card reveal" id="dish-kebbe">
+                    <div class="dish-img-wrapper">
+                        <img src="images/dish-manti.png" alt="Vospov Keufte" class="dish-img">
+                    </div>
+                    <div class="dish-info">
+                        <h3 class="dish-name">Vospov Keufte</h3>
+                        <p class="dish-desc">Traditional Armenian red lentil patties, delicately spiced and shaped by hand — a beloved plant-based classic from the old country.</p>
+                    </div>
+                </div>
+
+                <!-- Dish Card 7: Batata Harra -->
+                <div class="dish-card reveal" id="dish-itch">
+                    <div class="dish-img-wrapper">
+                        <img src="images/dish-mhammara.png" alt="Batata Harra" class="dish-img">
+                    </div>
+                    <div class="dish-info">
+                        <h3 class="dish-name">Batata Harra</h3>
+                        <p class="dish-desc">Spicy potatoes fried to golden perfection, tossed with garlic, coriander, and chili — crispy on the outside, fluffy inside.</p>
+                    </div>
+                </div>
+
+                <!-- Dish Card 8: Hommos with Meat -->
+                <div class="dish-card reveal" id="dish-basturma">
+                    <div class="dish-img-wrapper">
+                        <img src="images/dish-kebab.png" alt="Hommos with Meat" class="dish-img">
+                    </div>
+                    <div class="dish-info">
+                        <h3 class="dish-name">Hommos with Meat</h3>
+                        <p class="dish-desc">Creamy, velvety hommos topped with deeply spiced, pan-seared minced meat and toasted pine nuts.</p>
+                    </div>
+                </div>
+
+                <!-- Dish Card 9: Kebbeh Sayniyeh -->
+                <div class="dish-card reveal" id="dish-eggplant">
+                    <div class="dish-img-wrapper">
+                        <img src="images/dish-mhammara.png" alt="Kebbeh Sayniyeh" class="dish-img">
+                    </div>
+                    <div class="dish-info">
+                        <h3 class="dish-name">Kebbeh Sayniyeh</h3>
+                        <p class="dish-desc">Oven-baked layers of spiced minced meat and fine bulgur — a hearty Armenian-Lebanese classic carved tableside and served warm.</p>
+                    </div>
+                </div>
+
+                <!-- Dish Card 10: Baba Ghannouj -->
+                <div class="dish-card reveal" id="dish-baba-ghanoush">
+                    <div class="dish-img-wrapper">
+                        <img src="images/dish-mhammara.png" alt="Baba Ghannouj" class="dish-img">
+                    </div>
+                    <div class="dish-info">
+                        <h3 class="dish-name">Baba Ghannouj</h3>
+                        <p class="dish-desc">Silky, smoky roasted eggplant blended with tahini, lemon, and garlic — a timeless, melt-in-your-mouth appetizer.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         REVIEWS / SOCIAL PROOF
+         - Carousel of real quotes
+         - Large pull-quote style
+         ============================================================ -->
+    <section id="reviews" class="section section-reviews">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">What They Say</span>
+                <h2 class="section-title">Voices of Our <span class="text-gold">Guests</span></h2>
+            </div>
+            <div class="reviews-carousel" id="reviews-carousel">
+                <div class="reviews-track" id="reviews-track">
+
+                    <div class="review-card">
+                        <div class="review-stars">★★★★★</div>
+                        <blockquote class="review-quote">
+                            "Food made with pure love. It's impossible to visit Lebanon without stopping by at least once a week."
+                        </blockquote>
+                        <cite class="review-author">— Loyal Guest</cite>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-stars">★★★★★</div>
+                        <blockquote class="review-quote">
+                            "The best Armenian food I've ever had — in Lebanon and abroad."
+                        </blockquote>
+                        <cite class="review-author">— International Traveler</cite>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-stars">★★★★★</div>
+                        <blockquote class="review-quote">
+                            "I never leave reviews. But I HAD to for this restaurant."
+                        </blockquote>
+                        <cite class="review-author">— First-Time Reviewer</cite>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-stars">★★★★★</div>
+                        <blockquote class="review-quote">
+                            "A hidden gem. From the first dish, it became our favorite Armenian restaurant."
+                        </blockquote>
+                        <cite class="review-author">— Food Enthusiast</cite>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-stars">★★★★★</div>
+                        <blockquote class="review-quote">
+                            "Ridiculously fair prices for the quality and portions."
+                        </blockquote>
+                        <cite class="review-author">— Value Seeker</cite>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-stars">★★★★★</div>
+                        <blockquote class="review-quote">
+                            "One of the few places in Lebanon that has managed to improve even in difficult times."
+                        </blockquote>
+                        <cite class="review-author">— Returning Guest</cite>
+                    </div>
+
+                </div>
+            </div>
+            <div class="carousel-controls">
+                <button class="carousel-btn carousel-prev" id="carousel-prev" aria-label="Previous review">←</button>
+                <div class="carousel-dots" id="carousel-dots"></div>
+                <button class="carousel-btn carousel-next" id="carousel-next" aria-label="Next review">→</button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         WHY GHAZAR — Value Pillars
+         - 4 icon-driven pillars with descriptions
+         ============================================================ -->
+    <section id="why" class="section section-why">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">Why Choose Us</span>
+                <h2 class="section-title">Why <span class="text-gold">Ghazar</span></h2>
+            </div>
+            <div class="pillars-grid">
+                <div class="pillar reveal" id="pillar-1">
+                    <div class="pillar-icon">🏺</div>
+                    <h3 class="pillar-title">Authentic Armenian Recipes</h3>
+                    <p class="pillar-desc">Rooted in tradition, plated with pride. Every recipe has been passed down through generations of Armenian cooks.</p>
+                </div>
+                <div class="pillar reveal" id="pillar-2">
+                    <div class="pillar-icon">🍽️</div>
+                    <h3 class="pillar-title">Homestyle Cooking at Its Finest</h3>
+                    <p class="pillar-desc">Every dish tastes like it came from someone's grandmother's kitchen — because technically, it did.</p>
+                </div>
+                <div class="pillar reveal" id="pillar-3">
+                    <div class="pillar-icon">💰</div>
+                    <h3 class="pillar-title">Exceptional Value</h3>
+                    <p class="pillar-desc">Generous portions, fair prices, no compromise on quality. You'll wonder how we do it.</p>
+                </div>
+                <div class="pillar reveal" id="pillar-4">
+                    <div class="pillar-icon">🤝</div>
+                    <h3 class="pillar-title">Warm, Welcoming Service</h3>
+                    <p class="pillar-desc">Friendly staff who treat every guest like family. Because at Ghazar, you are family.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         ATMOSPHERE SECTION
+         - Full-width image with overlay text
+         ============================================================ -->
+    <section id="atmosphere" class="section section-atmosphere">
+        <div class="atmosphere-bg">
+            <img src="images/restaurant-interior.png" alt="Resto Ghazar cozy interior" class="atmosphere-bg-img">
+            <div class="atmosphere-overlay"></div>
+        </div>
+        <div class="atmosphere-content reveal">
+            <span class="section-tag">The Atmosphere</span>
+            <h2 class="atmosphere-title">Small in Size.<br><span class="text-gold">Enormous in Soul.</span></h2>
+            <p class="atmosphere-text">
+                Resto Ghazar is cozy, unpretentious, and unforgettable — a dining room that feels like coming home. 
+                The walls carry decades of laughter, the aroma of spices greets you at the door, 
+                and every seat in the house has a story.
+            </p>
+            <div class="atmosphere-divider">
+                <span class="divider-icon">✦</span>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         LOCATION & RESERVATION CTA
+         - Address, map placeholder, prominent booking button
+         ============================================================ -->
+    <section id="location" class="section section-location" >
+        <div class="container">
+            <div class="location-grid">
+                <div class="location-info reveal">
+                    <span class="section-tag">Find Us</span>
+                    <h2 class="section-title">Visit <span class="text-gold">Resto Ghazar</span></h2>
+                    <div class="location-details">
+                        <div class="location-item">
+                            <span class="location-icon">📍</span>
+                            <div>
+                                <strong>Address</strong>
+                                <p>Rue Arax, Bourj Hammoud, Lebanon</p>
+                            </div>
+                        </div>
+                        <div class="location-item">
+                            <span class="location-icon">🕐</span>
+                            <div>
+                                <strong>Hours</strong>
+                                <p>Mon - Thu & Sat: 12:00 PM - 12:00 AM<br>Fri: 9:00 AM - 12:00 AM | Sun: 12:00 PM - 4:00 PM</p>
+                            </div>
+                        </div>
+                        <div class="location-item">
+                            <span class="location-icon">📞</span>
+                            <div>
+                                <strong>Phone</strong>
+                                <p>+961 1 242 708</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-cta reveal" id="reserve">
+                    <div class="reserve-card">
+                        <div class="reserve-card-inner">
+                            <span class="reserve-icon">✦</span>
+                            <h3 class="reserve-title">Reserve Your Table</h3>
+                            <p class="reserve-text">Reservation recommended — this place fills up fast.</p>
+                            <p class="reserve-urgency">⚡ Tables fill quickly — especially on weekends</p>
+                            <a href="#" class="btn btn-primary btn-lg" id="btn-book-table">Book a Table</a>
+                            <p class="reserve-note">Or call us directly for instant reservation</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         FOOTER
+         - Logo, address, phone, social links, closing tagline
+         ============================================================ -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="footer-logo">
+                        <span class="logo-icon">✦</span>
+                        <span class="logo-text">Resto Ghazar</span>
+                    </a>
+                    <p class="footer-tagline">Come once. Come back forever.</p>
+                </div>
+                <div class="footer-links">
+                    <h4 class="footer-heading">Navigate</h4>
+                    <a href="#story">Our Story</a>
+                    <a href="#menu">Menu</a>
+                    <a href="#reviews">Reviews</a>
+                    <a href="#atmosphere">Atmosphere</a>
+                    <a href="#location">Location</a>
+                </div>
+                <div class="footer-contact">
+                    <h4 class="footer-heading">Contact</h4>
+                    <p>Rue Arax, Bourj Hammoud, Lebanon</p>
+                    <p>+961 1 242 708</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="WhatsApp">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Resto Ghazar. All rights reserved. Made with ♥ in Bourj Hammoud.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

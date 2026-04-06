@@ -1,0 +1,1375 @@
+/* =============================================================
+   RESTO GHAZAR — Premium Restaurant Landing Page
+   Design: Dark cinematic, gold accents, smooth animations
+   Fonts: Playfair Display (serif headings) + Inter (body text)
+   
+   PENJELASAN DESIGN SYSTEM:
+   ─────────────────────────
+   1. CSS Custom Properties (variables) → Centralized color/font tokens
+   2. Reset & Base → Normalize browser defaults
+   3. Layout Components → Reusable containers & grids
+   4. Typography → Font scale & hierarchy  
+   5. Animations → Scroll-reveal, parallax, hover transitions
+   6. Section-by-section styling
+   
+   Kenapa pakai CSS Variables?
+   → Supaya kalau mau ganti warna/font, cukup ubah di satu tempat.
+      Semua komponen yang pakai variable itu otomatis ikut berubah.
+   ============================================================= */
+
+/* ─── DESIGN TOKENS (CSS Custom Properties) ─────────────────── */
+:root {
+    /* Primary Colors — Dark cinematic palette */
+    --bg-primary: #0a0a0a;         /* Near-black background */
+    --bg-secondary: #111111;       /* Slightly lighter for cards */
+    --bg-elevated: #1a1a1a;        /* Card backgrounds */
+    --bg-overlay: rgba(10, 10, 10, 0.85); /* Transparent overlay */
+
+    /* Gold Accent Colors — Luxury feel */
+    --gold: #c9a96e;               /* Primary gold */
+    --gold-light: #e0c98f;         /* Hover/highlight gold */
+    --gold-dark: #a88b4a;          /* Darker gold for borders */
+    --gold-glow: rgba(201, 169, 110, 0.15); /* Subtle glow */
+
+    /* Burnt Amber — Secondary accent */
+    --amber: #d4722c;
+    --amber-light: #e8944d;
+
+    /* Text Colors */
+    --text-primary: #f5f0e8;       /* Warm off-white */
+    --text-secondary: #a09888;     /* Muted warm gray */
+    --text-accent: var(--gold);    /* Gold text for emphasis */
+
+    /* Typography */
+    --font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+    /* Spacing Scale — consistent rhythm */
+    --space-xs: 0.5rem;    /* 8px */
+    --space-sm: 1rem;      /* 16px */
+    --space-md: 1.5rem;    /* 24px */
+    --space-lg: 2.5rem;    /* 40px */
+    --space-xl: 4rem;      /* 64px */
+    --space-2xl: 6rem;     /* 96px */
+    --space-3xl: 8rem;     /* 128px */
+
+    /* Transitions */
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    --transition-fast: 0.2s var(--ease-out);
+    --transition-medium: 0.4s var(--ease-out);
+    --transition-slow: 0.8s var(--ease-out);
+
+    /* Border Radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+
+    /* Shadows */
+    --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.5);
+    --shadow-elevated: 0 8px 40px rgba(0, 0, 0, 0.6);
+    --shadow-gold: 0 4px 30px rgba(201, 169, 110, 0.2);
+}
+
+
+/* ─── RESET & BASE STYLES ───────────────────────────────────── 
+   Reset ini menghilangkan default browser styling yang 
+   berbeda-beda antar browser, agar kita mulai dari "kanvas bersih"
+   ─────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* border-box = width/height termasuk padding+border */
+}
+
+html {
+    scroll-behavior: smooth;  /* Smooth scroll saat klik anchor link */
+    font-size: 16px;          /* Base font size — semua rem relatif ke ini */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.7;         /* Line height 1.7 = spacing antar baris teks */
+    overflow-x: hidden;       /* Cegah horizontal scroll */
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Selection — ketika user highlight teks */
+::selection {
+    background: var(--gold);
+    color: var(--bg-primary);
+}
+
+
+/* ─── UTILITY CLASSES ───────────────────────────────────────── */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+}
+
+.text-gold {
+    color: var(--gold);
+}
+
+/* Section base — setiap section punya padding vertical konsisten */
+.section {
+    padding: var(--space-3xl) 0;
+    position: relative;
+}
+
+/* Section tag — label kecil di atas heading (e.g., "Our Story") */
+.section-tag {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: var(--space-sm);
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 3.5rem); /* Responsive font size */
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: var(--space-md);
+    color: var(--text-primary);
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+}
+
+
+/* ─── BUTTONS ───────────────────────────────────────────────── 
+   Dua varian button:
+   1. btn-primary → Solid gold background (CTA utama)
+   2. btn-outline → Border gold, fill on hover (CTA sekunder)
+   ─────────────────────────────────────────────────────────────── */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-medium);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--bg-primary);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-gold);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold-dark);
+}
+
+.btn-outline:hover {
+    background: var(--gold);
+    color: var(--bg-primary);
+    transform: translateY(-2px);
+}
+
+.btn-lg {
+    padding: 1.125rem 2.5rem;
+    font-size: 1rem;
+}
+
+
+/* ─── SCROLL REVEAL ANIMATION ───────────────────────────────── 
+   Elemen dengan class .reveal akan:
+   - Mulai tersembunyi (opacity: 0, translateY: 40px)
+   - Muncul dengan transisi saat masuk viewport
+   
+   JavaScript (IntersectionObserver) menambahkan class .revealed
+   saat elemen terlihat di layar
+   ─────────────────────────────────────────────────────────────── */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger delays — setiap child elemen bisa muncul bergantian */
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+
+/* =============================================================
+   HEADER / NAVIGATION
+   ─────────────────────────────────────────────────────────────
+   - Fixed position (selalu di atas layar)
+   - Transparan saat di hero, lalu solid saat scroll (via JS)
+   - Backdrop-filter: blur → efek glassmorphism
+   ============================================================= */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: var(--space-sm) 0;
+    transition: all var(--transition-medium);
+    background: transparent;
+}
+
+/* Class ditambahkan oleh JS saat user scroll */
+.site-header.scrolled {
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(201, 169, 110, 0.1);
+}
+
+.header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    z-index: 1001;
+}
+
+.logo-icon {
+    color: var(--gold);
+    font-size: 1.5rem;
+}
+
+.logo-text {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 0.02em;
+}
+
+/* Nav Links */
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+}
+
+.nav-link {
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    transition: color var(--transition-fast);
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--gold);
+    transition: width var(--transition-medium);
+}
+
+.nav-link:hover {
+    color: var(--gold);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Header Reserve Button */
+.btn-reserve-header {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold-dark);
+    padding: 0.625rem 1.5rem;
+    font-size: 0.8rem;
+}
+
+.btn-reserve-header:hover {
+    background: var(--gold);
+    color: var(--bg-primary);
+}
+
+/* Hamburger Menu (hidden on desktop) */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 1001;
+}
+
+.hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text-primary);
+    transition: all var(--transition-fast);
+    border-radius: 2px;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Mobile Nav Overlay */
+.mobile-nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(10, 10, 10, 0.98);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-medium);
+}
+
+.mobile-nav-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.mobile-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+}
+
+.mobile-nav-link {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    color: var(--text-primary);
+    transition: color var(--transition-fast);
+}
+
+.mobile-nav-link:hover {
+    color: var(--gold);
+}
+
+.btn-reserve-mobile {
+    margin-top: var(--space-sm);
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--bg-primary);
+}
+
+
+/* =============================================================
+   HERO SECTION
+   ─────────────────────────────────────────────────────────────
+   - Full viewport height (100vh)
+   - Background image dengan overlay gradient gelap
+   - Content centered secara vertical & horizontal
+   - Scroll indicator di bawah
+   ============================================================= */
+.hero {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.hero-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;        /* Image memenuhi area tanpa distorsi */
+    object-position: center;
+    transform: scale(1.05);   /* Sedikit zoom untuk parallax effect */
+    transition: transform 8s ease; /* Slow zoom animation */
+}
+
+/* Dark gradient overlay di atas image */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        180deg,
+        rgba(10, 10, 10, 0.4) 0%,
+        rgba(10, 10, 10, 0.6) 40%,
+        rgba(10, 10, 10, 0.85) 100%
+    );
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 800px;
+    padding: 0 var(--space-md);
+}
+
+/* Star Badge */
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 1.25rem;
+    background: rgba(201, 169, 110, 0.1);
+    border: 1px solid rgba(201, 169, 110, 0.3);
+    border-radius: 100px;
+    margin-bottom: var(--space-lg);
+}
+
+.hero-badge .stars {
+    color: var(--gold);
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+}
+
+.hero-badge .badge-text {
+    color: var(--gold-light);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+}
+
+/* Hero Title */
+.hero-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: var(--space-md);
+    color: var(--text-primary);
+}
+
+.hero-subtitle {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-lg);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+}
+
+/* CTA Buttons */
+.hero-ctas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-md);
+}
+
+.hero-trust {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 1;
+}
+
+.scroll-indicator span {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    opacity: 0.5;
+}
+
+.scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
+    50% { opacity: 1; transform: scaleY(1); }
+}
+
+
+/* =============================================================
+   OUR STORY SECTION
+   ─────────────────────────────────────────────────────────────
+   Layout: grid 2 kolom
+   - Kiri: label + decorative gold line
+   - Kanan: narrative text   
+   ============================================================= */
+.section-story {
+    background: var(--bg-primary);
+    border-top: 1px solid rgba(201, 169, 110, 0.08);
+}
+
+.story-grid {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: var(--space-xl);
+    align-items: start;
+}
+
+.story-label {
+    position: sticky;
+    top: 120px; /* Stays visible as you scroll the text */
+}
+
+.gold-line {
+    width: 40px;
+    height: 2px;
+    background: var(--gold);
+    margin-top: var(--space-sm);
+}
+
+.story-content {
+    max-width: 700px;
+}
+
+.story-text {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-md);
+    line-height: 1.9;
+}
+
+.story-text strong {
+    color: var(--text-primary);
+}
+
+.story-text em {
+    color: var(--gold);
+    font-style: italic;
+}
+
+.story-signature {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+}
+
+.signature-line {
+    width: 40px;
+    height: 1px;
+    background: var(--gold-dark);
+}
+
+.signature-text {
+    font-family: var(--font-heading);
+    font-style: italic;
+    color: var(--gold);
+    font-size: 1rem;
+}
+
+
+/* =============================================================
+   SIGNATURE DISHES (MENU) SECTION
+   ─────────────────────────────────────────────────────────────
+   Grid layout with hover effects on each card.
+   Featured card (Manti) spans 2 columns.
+   ============================================================= */
+.section-menu {
+    background: var(--bg-secondary);
+}
+
+.dishes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-md);
+}
+
+/* Dish Card */
+.dish-card {
+    background: var(--bg-elevated);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    transition: all var(--transition-medium);
+    cursor: pointer;
+}
+
+.dish-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(201, 169, 110, 0.2);
+    box-shadow: var(--shadow-gold);
+}
+
+/* Featured card (Manti) — spans 2 columns */
+.dish-card-featured {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.dish-card-featured .dish-img-wrapper {
+    height: 100%;
+    min-height: 300px;
+}
+
+.dish-card-featured .dish-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--space-lg);
+}
+
+/* Image wrapper */
+.dish-img-wrapper {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+}
+
+.dish-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+
+.dish-card:hover .dish-img {
+    transform: scale(1.08);
+}
+
+/* "Fan Favorite" badge */
+.dish-badge {
+    position: absolute;
+    top: var(--space-sm);
+    left: var(--space-sm);
+    background: var(--gold);
+    color: var(--bg-primary);
+    padding: 0.35rem 0.75rem;
+    border-radius: 100px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* Dish Info */
+.dish-info {
+    padding: var(--space-md);
+}
+
+.dish-name {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-xs);
+}
+
+.dish-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+
+/* =============================================================
+   REVIEWS SECTION
+   ─────────────────────────────────────────────────────────────
+   Carousel: horizontal scroll dengan CSS + JS controls
+   Pull-quote style — large, elegant text
+   ============================================================= */
+.section-reviews {
+    background: var(--bg-primary);
+    overflow: hidden;
+}
+
+.reviews-carousel {
+    overflow: hidden;
+    margin: 0 -var(--space-md);
+    padding: 0 var(--space-md);
+}
+
+.reviews-track {
+    display: flex;
+    gap: var(--space-md);
+    transition: transform 0.6s var(--ease-out);
+    /* Will be controlled by JS */
+}
+
+.review-card {
+    min-width: 100%;
+    max-width: 100%;
+    text-align: center;
+    padding: var(--space-xl) var(--space-lg);
+    flex-shrink: 0;
+}
+
+.review-stars {
+    color: var(--gold);
+    font-size: 1.25rem;
+    letter-spacing: 4px;
+    margin-bottom: var(--space-md);
+}
+
+.review-quote {
+    font-family: var(--font-heading);
+    font-size: clamp(1.25rem, 3vw, 2rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text-primary);
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto var(--space-md);
+    border: none;
+    /* decorative quote marks */
+    position: relative;
+}
+
+.review-quote::before {
+    content: '"';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-heading);
+    font-size: 4rem;
+    color: var(--gold);
+    opacity: 0.3;
+    line-height: 1;
+}
+
+.review-author {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-style: normal;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* Carousel Controls */
+.carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+}
+
+.carousel-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid var(--gold-dark);
+    background: transparent;
+    color: var(--gold);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-btn:hover {
+    background: var(--gold);
+    color: var(--bg-primary);
+}
+
+.carousel-dots {
+    display: flex;
+    gap: 8px;
+}
+
+.carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--text-secondary);
+    opacity: 0.3;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    border: none;
+}
+
+.carousel-dot.active {
+    background: var(--gold);
+    opacity: 1;
+    width: 24px;
+    border-radius: 4px;
+}
+
+
+/* =============================================================
+   WHY GHAZAR — Value Pillars
+   ─────────────────────────────────────────────────────────────
+   4-column grid with icon cards
+   ============================================================= */
+.section-why {
+    background: var(--bg-secondary);
+}
+
+.pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+}
+
+.pillar {
+    text-align: center;
+    padding: var(--space-xl) var(--space-md);
+    background: var(--bg-elevated);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    transition: all var(--transition-medium);
+}
+
+.pillar:hover {
+    border-color: rgba(201, 169, 110, 0.2);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-gold);
+}
+
+.pillar-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-md);
+    display: block;
+}
+
+.pillar-title {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+}
+
+.pillar-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+
+/* =============================================================
+   ATMOSPHERE SECTION
+   ─────────────────────────────────────────────────────────────
+   Full-width background image with centered overlay text
+   ============================================================= */
+.section-atmosphere {
+    position: relative;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-3xl) 0;
+}
+
+.atmosphere-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.atmosphere-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.atmosphere-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        180deg,
+        rgba(10, 10, 10, 0.7) 0%,
+        rgba(10, 10, 10, 0.8) 50%,
+        rgba(10, 10, 10, 0.9) 100%
+    );
+}
+
+.atmosphere-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 700px;
+    padding: 0 var(--space-md);
+}
+
+.atmosphere-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: var(--space-md);
+    margin-top: var(--space-sm);
+}
+
+.atmosphere-text {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.9;
+}
+
+.atmosphere-divider {
+    margin-top: var(--space-lg);
+}
+
+.divider-icon {
+    color: var(--gold);
+    font-size: 1.5rem;
+    opacity: 0.5;
+}
+
+
+/* =============================================================
+   LOCATION & RESERVATION SECTION
+   ─────────────────────────────────────────────────────────────
+   2-column layout: info kiri, reservation card kanan
+   ============================================================= */
+.section-location {
+    background: var(--bg-primary);
+    border-top: 1px solid rgba(201, 169, 110, 0.08);
+}
+
+.location-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: center;
+}
+
+.location-details {
+    margin-top: var(--space-lg);
+}
+
+.location-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.location-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.location-item strong {
+    display: block;
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.location-item p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+/* Reservation Card */
+.reserve-card {
+    background: linear-gradient(145deg, var(--bg-elevated), var(--bg-secondary));
+    border-radius: var(--radius-xl);
+    border: 1px solid rgba(201, 169, 110, 0.15);
+    overflow: hidden;
+    position: relative;
+}
+
+.reserve-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold-dark), var(--gold-light), var(--gold-dark));
+}
+
+.reserve-card-inner {
+    padding: var(--space-xl);
+    text-align: center;
+}
+
+.reserve-icon {
+    display: inline-block;
+    color: var(--gold);
+    font-size: 2rem;
+    margin-bottom: var(--space-sm);
+}
+
+.reserve-title {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+}
+
+.reserve-text {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-sm);
+}
+
+.reserve-urgency {
+    color: var(--amber);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: var(--space-md);
+}
+
+.btn-book-table {
+    margin-bottom: var(--space-sm);
+}
+
+.reserve-note {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    opacity: 0.6;
+    margin-top: var(--space-sm);
+}
+
+
+/* =============================================================
+   FOOTER
+   ─────────────────────────────────────────────────────────────
+   Clean, minimal footer with 3-column grid
+   ============================================================= */
+.site-footer {
+    background: var(--bg-secondary);
+    border-top: 1px solid rgba(201, 169, 110, 0.08);
+    padding: var(--space-xl) 0;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: var(--space-xl);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: var(--space-sm);
+}
+
+.footer-tagline {
+    font-family: var(--font-heading);
+    font-style: italic;
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+.footer-heading {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: var(--space-md);
+}
+
+.footer-links a {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+    transition: color var(--transition-fast);
+}
+
+.footer-links a:hover {
+    color: var(--gold);
+}
+
+.footer-contact p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.footer-social {
+    display: flex;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    transition: all var(--transition-fast);
+}
+
+.social-link:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: translateY(-2px);
+}
+
+.footer-bottom {
+    padding-top: var(--space-md);
+    text-align: center;
+}
+
+.footer-bottom p {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    opacity: 0.5;
+}
+
+
+/* =============================================================
+   RESPONSIVE DESIGN
+   ─────────────────────────────────────────────────────────────
+   Mobile-first adjustments menggunakan media queries.
+   
+   Breakpoints:
+   - 1024px: Tablet landscape
+   - 768px:  Tablet portrait
+   - 480px:  Mobile
+   ============================================================= */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .pillars-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .location-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+    .story-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+    .story-label {
+        position: static;
+    }
+    .dish-card-featured {
+        grid-column: span 2;
+    }
+}
+
+/* Tablet Portrait */
+@media (max-width: 768px) {
+    .section {
+        padding: var(--space-2xl) 0;
+    }
+    
+    /* Hide desktop nav, show hamburger */
+    .main-nav {
+        display: none;
+    }
+    .btn-reserve-header {
+        display: none;
+    }
+    .hamburger {
+        display: flex;
+    }
+    
+    .dish-card-featured {
+        grid-column: span 1;
+        grid-template-columns: 1fr;
+    }
+    .dish-card-featured .dish-img-wrapper {
+        min-height: 200px;
+    }
+    
+    .dishes-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+    
+    .pillars-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+    
+    .hero-title {
+        font-size: clamp(2rem, 8vw, 3rem);
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    :root {
+        font-size: 15px;
+    }
+    
+    .hero-ctas {
+        flex-direction: column;
+        width: 100%;
+    }
+    .hero-ctas .btn {
+        width: 100%;
+    }
+    
+    .dishes-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .review-card {
+        padding: var(--space-lg) var(--space-sm);
+    }
+    
+    .reserve-card-inner {
+        padding: var(--space-lg);
+    }
+}
+
+
+/* =============================================================
+   SUBTLE ANIMATIONS & MICRO-INTERACTIONS
+   ─────────────────────────────────────────────────────────────
+   - Grain texture overlay (cinematic feel)
+   - Glowing border on hover
+   - Shimmer effect on gold elements
+   ============================================================= */
+
+/* Film grain texture — adds cinematic quality */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.03;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    background-size: 256px 256px;
+}
+
+/* Gold shimmer animation for special elements */
+@keyframes goldShimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+.reserve-card::before {
+    background-size: 200% 100%;
+    animation: goldShimmer 4s linear infinite;
+}
+
+/* Subtle float animation */
+@keyframes gentleFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+.hero-badge {
+    animation: gentleFloat 4s ease-in-out infinite;
+}
